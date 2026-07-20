@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cipher Reel — AI Systems &amp; Motion Portfolio</title>
+<meta name="description" content="An AI engineer's reel — six systems, shipped and shown.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- signal rail: signature scroll/progress element -->
+<div class="signal-rail" aria-hidden="true">
+  <div class="signal-rail__track">
+    <div class="signal-rail__fill" id="signalFill"></div>
+  </div>
+  <span class="signal-rail__tick" id="signalTick">00</span>
+</div>
+
+<header class="nav" id="siteNav">
+  <a class="nav__mark" href="#top">
+    <span class="nav__mark-glyph">◈</span> CIPHER<span class="nav__mark-dim">REEL</span>
+  </a>
+  <nav class="nav__links" id="navLinks">
+    <a href="#reel">Reel</a>
+    <a href="#approach">Approach</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="nav__cta">Get in touch</a>
+  </nav>
+  <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero__video-wrap">
+      <video class="hero__video" id="heroVideo" autoplay muted loop playsinline preload="auto">
+        <source src="assets/video/reel-01.mp4" type="video/mp4">
+      </video>
+      <div class="hero__scan" aria-hidden="true"></div>
+      <div class="hero__vignette" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero__content">
+      <p class="eyebrow"><span class="eyebrow__dot"></span> REC · AI ENGINEER / DIRECTOR OF MODELS</p>
+      <h1 class="hero__title">
+        <span class="line" data-line="1">Models that ship.</span>
+        <span class="line line--accent" data-line="2">Systems that perform.</span>
+      </h1>
+      <p class="hero__sub">
+        Six builds, captured on tape. Recommender engines, computer vision pipelines,
+        and language systems — shown in motion, not slides.
+      </p>
+      <div class="hero__actions">
+        <a href="#reel" class="btn btn--primary">Watch the reel <span aria-hidden="true">▸</span></a>
+        <a href="#contact" class="btn btn--ghost">Start a project</a>
+      </div>
+    </div>
+
+    <div class="hero__counter" aria-hidden="true">
+      <span id="heroCounterTime">00:00:00</span>
+      <span class="hero__counter-label">TAPE&nbsp;COUNTER</span>
+    </div>
+
+    <a class="hero__scroll-cue" href="#reel" aria-label="Scroll to reel">
+      <span></span> SCROLL
+    </a>
+  </section>
+
+  <!-- ============ REEL ============ -->
+  <section class="reel" id="reel">
+    <div class="section-head">
+      <p class="eyebrow eyebrow--muted">THE&nbsp;REEL · 6 CLIPS</p>
+      <h2 class="section-title">Six systems, in motion</h2>
+      <p class="section-sub">
+        Every card below is a real run — inference, training curves, or a live
+        product surface — captured straight from the machine. Press play, or open
+        a clip full-frame.
+      </p>
+    </div>
+
+    <div class="filmstrip" id="filmstrip">
+      <!-- cards injected by script.js from the PROJECTS array -->
+    </div>
+  </section>
+
+  <!-- ============ APPROACH ============ -->
+  <section class="approach" id="approach">
+    <div class="section-head">
+      <p class="eyebrow eyebrow--muted">HOW IT GETS BUILT</p>
+      <h2 class="section-title">Signal → Model → Ship</h2>
+      <p class="section-sub">Same three passes on every engagement, regardless of domain.</p>
+    </div>
+
+    <ol class="process">
+      <li class="process__step">
+        <span class="process__index">01</span>
+        <h3>Signal</h3>
+        <p>Instrument the problem before touching a model. Define the metric that
+        actually matters, and the data pipeline that can feed it reliably.</p>
+      </li>
+      <li class="process__step">
+        <span class="process__index">02</span>
+        <h3>Model</h3>
+        <p>Prototype fast, evaluate honestly. Favor the smallest architecture that
+        clears the bar — then push it until it doesn't.</p>
+      </li>
+      <li class="process__step">
+        <span class="process__index">03</span>
+        <h3>Ship</h3>
+        <p>Wrap it in something people can actually use: an API, a UI, a job that
+        runs at 3am without paging anyone.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about" id="about">
+    <div class="about__grid">
+      <div class="about__copy">
+        <p class="eyebrow eyebrow--muted">ABOUT</p>
+        <h2 class="section-title">I build the part after the demo.</h2>
+        <p>
+          Most model demos die in a notebook. My work is the six months after —
+          getting a system past a single good run and into something that holds
+          up under real traffic, real users, and real edge cases.
+        </p>
+        <p>
+          Formats above range from a recommendation engine serving traffic in
+          production to a from-scratch vision model trained for a client with
+          no ML team of their own. Every clip on this page is unscripted output,
+          not a rendered mockup.
+        </p>
+        <div class="about__stats">
+          <div class="stat">
+            <span class="stat__num">6</span>
+            <span class="stat__label">Systems shipped</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">3</span>
+            <span class="stat__label">Domains — vision, language, ranking</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">24/7</span>
+            <span class="stat__label">Uptime target, not aspiration</span>
+          </div>
+        </div>
+      </div>
+      <div class="about__tags" aria-label="Tools and stack">
+        <span>PyTorch</span><span>Python</span><span>CUDA</span>
+        <span>Transformers</span><span>Kubernetes</span><span>Ray</span>
+        <span>Postgres</span><span>ONNX</span><span>Triton</span>
+        <span>Airflow</span><span>gRPC</span><span>Terraform</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <p class="eyebrow eyebrow--muted">GET IN TOUCH</p>
+    <h2 class="section-title contact__title">Have a system that needs shipping?</h2>
+    <p class="contact__sub">Tell me what it does today, and what it needs to do next.</p>
+    <a class="contact__email" href="mailto:hello@cipherreel.ai">hello@cipherreel.ai</a>
+
+    <div class="contact__links">
+      <a href="#" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#" target="_blank" rel="noopener">X / Twitter</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>© <span id="year"></span> Cipher Reel. All systems operational.</span>
+  <span class="site-footer__mono">STATUS: <span class="status-dot"></span> LIVE</span>
+</footer>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox__backdrop" id="lightboxBackdrop"></div>
+  <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="Project video">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close">✕</button>
+    <video class="lightbox__video" id="lightboxVideo" controls playsinline></video>
+    <div class="lightbox__meta">
+      <span class="lightbox__index" id="lightboxIndex">01</span>
+      <div>
+        <h3 id="lightboxTitle">Title</h3>
+        <p id="lightboxDesc">Description</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
