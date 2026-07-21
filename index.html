@@ -3,200 +3,314 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cipher Reel — AI Systems &amp; Motion Portfolio</title>
-<meta name="description" content="An AI engineer's reel — six systems, shipped and shown.">
+<title>Aranya Palace — A Journey in Six Chapters</title>
+<meta name="description" content="Aranya Palace: a heritage residence retold through six moving chapters, from the aerial approach to the last light over the gardens.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- signal rail: signature scroll/progress element -->
-<div class="signal-rail" aria-hidden="true">
-  <div class="signal-rail__track">
-    <div class="signal-rail__fill" id="signalFill"></div>
+<!-- ================= LOADER ================= -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-crest">
+    <svg viewBox="0 0 100 100" class="crest-svg">
+      <circle cx="50" cy="50" r="46" class="crest-ring"></circle>
+      <path d="M50 14 L58 42 L86 50 L58 58 L50 86 L42 58 L14 50 L42 42 Z" class="crest-mark"></path>
+    </svg>
   </div>
-  <span class="signal-rail__tick" id="signalTick">00</span>
+  <p class="loader-label">ARANYA PALACE</p>
 </div>
 
-<header class="nav" id="siteNav">
-  <a class="nav__mark" href="#top">
-    <span class="nav__mark-glyph">◈</span> CIPHER<span class="nav__mark-dim">REEL</span>
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav-crest" aria-label="Aranya Palace, home">
+    <svg viewBox="0 0 100 100" class="nav-crest-svg" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" class="crest-ring"></circle>
+      <path d="M50 14 L58 42 L86 50 L58 58 L50 86 L42 58 L14 50 L42 42 Z" class="crest-mark"></path>
+    </svg>
+    <span>Aranya&nbsp;Palace</span>
   </a>
-  <nav class="nav__links" id="navLinks">
-    <a href="#reel">Reel</a>
-    <a href="#approach">Approach</a>
-    <a href="#about">About</a>
-    <a href="#contact" class="nav__cta">Get in touch</a>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="#journey" data-nav>The Journey</a>
+    <a href="#suites" data-nav>Suites</a>
+    <a href="#gardens" data-nav>Gardens</a>
+    <a href="#gallery" data-nav>Gallery</a>
+    <a href="#contact" data-nav>Enquire</a>
   </nav>
-  <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </header>
 
-<main id="top">
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
+    <source src="assets/video/01-hero-aerial.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim"></div>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="hero">
-    <div class="hero__video-wrap">
-      <video class="hero__video" id="heroVideo" autoplay muted loop playsinline preload="auto">
-        <source src="assets/video/reel-01.mp4" type="video/mp4">
-      </video>
-      <div class="hero__scan" aria-hidden="true"></div>
-      <div class="hero__vignette" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="eyebrow reveal">A Heritage Residence, Rajasthan</p>
+    <h1 class="hero-title reveal">
+      <span>Six Chapters.</span>
+      <span class="hero-title-em">One Arrival.</span>
+    </h1>
+    <p class="hero-sub reveal">Descend from the ridgeline into a palace that has kept its own hours since 1861 — told here in six unbroken moving frames, not one filter applied.</p>
+    <div class="hero-actions reveal">
+      <a href="#journey" class="btn btn-primary">Begin the Journey</a>
+      <button class="btn btn-ghost" id="heroSoundBtn" aria-pressed="false">
+        <span class="sound-icon" aria-hidden="true"></span>
+        <span class="sound-label">Sound off</span>
+      </button>
     </div>
+  </div>
 
-    <div class="hero__content">
-      <p class="eyebrow"><span class="eyebrow__dot"></span> REC · AI ENGINEER / DIRECTOR OF MODELS</p>
-      <h1 class="hero__title">
-        <span class="line" data-line="1">Models that ship.</span>
-        <span class="line line--accent" data-line="2">Systems that perform.</span>
-      </h1>
-      <p class="hero__sub">
-        Six builds, captured on tape. Recommender engines, computer vision pipelines,
-        and language systems — shown in motion, not slides.
-      </p>
-      <div class="hero__actions">
-        <a href="#reel" class="btn btn--primary">Watch the reel <span aria-hidden="true">▸</span></a>
-        <a href="#contact" class="btn btn--ghost">Start a project</a>
+  <a href="#journey" class="scroll-cue" aria-label="Scroll to explore">
+    <span class="scroll-cue-line"></span>
+    <span>Scroll</span>
+  </a>
+</section>
+
+<!-- ================= INTRO ================= -->
+<section class="intro">
+  <div class="intro-inner">
+    <p class="intro-kicker">No. 03 on the ridge, Aravalli hills</p>
+    <h2 class="intro-line">
+      The palace does not perform for the camera.<br>
+      The camera simply learned to wait for it.
+    </h2>
+    <p class="intro-copy">Every reel on this page is a single, unedited pass through the property — the gate at dawn, the durbar at rest, a suite before the linens are turned. We built this site as we would guide a first-time guest: in order, unhurried, chapter by chapter.</p>
+  </div>
+</section>
+
+<!-- ================= THE JOURNEY (sequential narrative) ================= -->
+<section class="journey" id="journey">
+  <div class="journey-head">
+    <p class="eyebrow">The Journey</p>
+    <h2 class="section-title">Arrival to nightfall, in the order you'll live it</h2>
+  </div>
+
+  <div class="journey-line" aria-hidden="true"></div>
+
+  <div class="journey-stages">
+
+    <article class="stage" id="suites-anchor" data-stage="02">
+      <div class="stage-media">
+        <video class="stage-video" data-src="assets/video/02-arrival-gate.mp4" muted loop playsinline preload="none"></video>
+        <div class="stage-media-frame"></div>
       </div>
-    </div>
+      <div class="stage-text">
+        <span class="stage-num">02</span>
+        <h3>The Arrival Gate</h3>
+        <p>Hand-riveted teak, iron studs cast in the palace's own foundry, and a threshold that has not moved in a hundred and sixty years. The car stops. The gate does the rest.</p>
+      </div>
+    </article>
 
-    <div class="hero__counter" aria-hidden="true">
-      <span id="heroCounterTime">00:00:00</span>
-      <span class="hero__counter-label">TAPE&nbsp;COUNTER</span>
-    </div>
+    <article class="stage stage-reverse" data-stage="03">
+      <div class="stage-media">
+        <video class="stage-video" data-src="assets/video/03-durbar-lobby.mp4" muted loop playsinline preload="none"></video>
+        <div class="stage-media-frame"></div>
+      </div>
+      <div class="stage-text">
+        <span class="stage-num">03</span>
+        <h3>The Durbar Lobby</h3>
+        <p>Once the hall of public audience, now the first room a guest stands in. The frescoes are original; the silence is by design — no piped music competes with forty-foot ceilings.</p>
+      </div>
+    </article>
 
-    <a class="hero__scroll-cue" href="#reel" aria-label="Scroll to reel">
-      <span></span> SCROLL
+    <article class="stage" id="suites" data-stage="04">
+      <div class="stage-media">
+        <video class="stage-video" data-src="assets/video/04-royal-suite.mp4" muted loop playsinline preload="none"></video>
+        <div class="stage-media-frame"></div>
+      </div>
+      <div class="stage-text">
+        <span class="stage-num">04</span>
+        <h3>The Royal Suite</h3>
+        <p>Six hundred square feet that once housed a Maharaja's private study. The desk is still where he left it. The Wi-Fi, mercifully, is not from the same era.</p>
+      </div>
+    </article>
+
+    <article class="stage stage-reverse" id="gardens" data-stage="05">
+      <div class="stage-media">
+        <video class="stage-video" data-src="assets/video/05-pool-gardens.mp4" muted loop playsinline preload="none"></video>
+        <div class="stage-media-frame"></div>
+      </div>
+      <div class="stage-text">
+        <span class="stage-num">05</span>
+        <h3>The Pool &amp; Gardens</h3>
+        <p>A stepwell reimagined as a lap pool, bordered by champa trees planted for a wedding in 1932. Breakfast is served at the waterline, whenever you decide morning begins.</p>
+      </div>
+    </article>
+
+    <article class="stage" data-stage="06">
+      <div class="stage-media">
+        <video class="stage-video" data-src="assets/video/06-night-finale.mp4" muted loop playsinline preload="none"></video>
+        <div class="stage-media-frame"></div>
+      </div>
+      <div class="stage-text">
+        <span class="stage-num">06</span>
+        <h3>The Evening, Lit</h3>
+        <p>Four thousand oil lamps, placed by hand along every parapet, every solstice. This is the last thing our guests see before dinner — and the first thing they ask us to explain.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ================= GALLERY / PORTFOLIO — all six films ================= -->
+<section class="gallery" id="gallery">
+  <div class="gallery-head">
+    <p class="eyebrow">The Full Reel</p>
+    <h2 class="section-title">All six chapters, in one place</h2>
+    <p class="gallery-copy">Tap any frame to watch it in full, with sound.</p>
+  </div>
+
+  <div class="gallery-grid">
+
+    <button class="gallery-card gallery-card-wide" data-video="assets/video/01-hero-aerial.mp4" data-title="01 — The Aerial Approach">
+      <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/01-hero-aerial.mp4"></video>
+      <span class="gallery-card-info">
+        <span class="gallery-num">01</span>
+        <span class="gallery-name">The Aerial Approach</span>
+      </span>
+      <span class="gallery-play" aria-hidden="true"></span>
+    </button>
+
+    <button class="gallery-card" data-video="assets/video/02-arrival-gate.mp4" data-title="02 — The Arrival Gate">
+      <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/02-arrival-gate.mp4"></video>
+      <span class="gallery-card-info">
+        <span class="gallery-num">02</span>
+        <span class="gallery-name">The Arrival Gate</span>
+      </span>
+      <span class="gallery-play" aria-hidden="true"></span>
+    </button>
+
+    <button class="gallery-card" data-video="assets/video/03-durbar-lobby.mp4" data-title="03 — The Durbar Lobby">
+      <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/03-durbar-lobby.mp4"></video>
+      <span class="gallery-card-info">
+        <span class="gallery-num">03</span>
+        <span class="gallery-name">The Durbar Lobby</span>
+      </span>
+      <span class="gallery-play" aria-hidden="true"></span>
+    </button>
+
+    <button class="gallery-card" data-video="assets/video/04-royal-suite.mp4" data-title="04 — The Royal Suite">
+      <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/04-royal-suite.mp4"></video>
+      <span class="gallery-card-info">
+        <span class="gallery-num">04</span>
+        <span class="gallery-name">The Royal Suite</span>
+      </span>
+      <span class="gallery-play" aria-hidden="true"></span>
+    </button>
+
+    <button class="gallery-card" data-video="assets/video/05-pool-gardens.mp4" data-title="05 — The Pool &amp; Gardens">
+      <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/05-pool-gardens.mp4"></video>
+      <span class="gallery-card-info">
+        <span class="gallery-num">05</span>
+        <span class="gallery-name">The Pool &amp; Gardens</span>
+      </span>
+      <span class="gallery-play" aria-hidden="true"></span>
+    </button>
+
+    <button class="gallery-card gallery-card-wide" data-video="assets/video/06-night-finale.mp4" data-title="06 — The Evening, Lit">
+      <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/06-night-finale.mp4"></video>
+      <span class="gallery-card-info">
+        <span class="gallery-num">06</span>
+        <span class="gallery-name">The Evening, Lit</span>
+      </span>
+      <span class="gallery-play" aria-hidden="true"></span>
+    </button>
+
+  </div>
+</section>
+
+<!-- ================= QUOTE / STAT STRIP ================= -->
+<section class="strip">
+  <div class="strip-item">
+    <span class="strip-num">1861</span>
+    <span class="strip-label">Year the gate was hung</span>
+  </div>
+  <div class="strip-divider" aria-hidden="true"></div>
+  <div class="strip-item">
+    <span class="strip-num">18</span>
+    <span class="strip-label">Suites, none identical</span>
+  </div>
+  <div class="strip-divider" aria-hidden="true"></div>
+  <div class="strip-item">
+    <span class="strip-num">4,000</span>
+    <span class="strip-label">Lamps, lit by hand nightly</span>
+  </div>
+  <div class="strip-divider" aria-hidden="true"></div>
+  <div class="strip-item">
+    <span class="strip-num">01</span>
+    <span class="strip-label">Arrival, done properly</span>
+  </div>
+</section>
+
+<!-- ================= CONTACT / CTA ================= -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <p class="eyebrow">Enquire</p>
+    <h2 class="contact-title">The ridge is quiet after dusk. Come see why.</h2>
+    <p class="contact-copy">Reservations are handled by a person, not a form. Write to us and a member of the house will reply within one day.</p>
+    <form class="contact-form" id="contactForm">
+      <div class="field-row">
+        <label class="field">
+          <span>Name</span>
+          <input type="text" name="name" required autocomplete="name">
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+      </div>
+      <label class="field">
+        <span>Preferred dates &amp; chapter of interest</span>
+        <textarea name="message" rows="3" placeholder="e.g. Royal Suite, first week of December"></textarea>
+      </label>
+      <button type="submit" class="btn btn-primary btn-wide">Send Enquiry</button>
+      <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-top">
+    <a href="#top" class="footer-crest">
+      <svg viewBox="0 0 100 100" class="nav-crest-svg" aria-hidden="true">
+        <circle cx="50" cy="50" r="46" class="crest-ring"></circle>
+        <path d="M50 14 L58 42 L86 50 L58 58 L50 86 L42 58 L14 50 L42 42 Z" class="crest-mark"></path>
+      </svg>
+      <span>Aranya&nbsp;Palace</span>
     </a>
-  </section>
-
-  <!-- ============ REEL ============ -->
-  <section class="reel" id="reel">
-    <div class="section-head">
-      <p class="eyebrow eyebrow--muted">THE&nbsp;REEL · 6 CLIPS</p>
-      <h2 class="section-title">Six systems, in motion</h2>
-      <p class="section-sub">
-        Every card below is a real run — inference, training curves, or a live
-        product surface — captured straight from the machine. Press play, or open
-        a clip full-frame.
-      </p>
-    </div>
-
-    <div class="filmstrip" id="filmstrip">
-      <!-- cards injected by script.js from the PROJECTS array -->
-    </div>
-  </section>
-
-  <!-- ============ APPROACH ============ -->
-  <section class="approach" id="approach">
-    <div class="section-head">
-      <p class="eyebrow eyebrow--muted">HOW IT GETS BUILT</p>
-      <h2 class="section-title">Signal → Model → Ship</h2>
-      <p class="section-sub">Same three passes on every engagement, regardless of domain.</p>
-    </div>
-
-    <ol class="process">
-      <li class="process__step">
-        <span class="process__index">01</span>
-        <h3>Signal</h3>
-        <p>Instrument the problem before touching a model. Define the metric that
-        actually matters, and the data pipeline that can feed it reliably.</p>
-      </li>
-      <li class="process__step">
-        <span class="process__index">02</span>
-        <h3>Model</h3>
-        <p>Prototype fast, evaluate honestly. Favor the smallest architecture that
-        clears the bar — then push it until it doesn't.</p>
-      </li>
-      <li class="process__step">
-        <span class="process__index">03</span>
-        <h3>Ship</h3>
-        <p>Wrap it in something people can actually use: an API, a UI, a job that
-        runs at 3am without paging anyone.</p>
-      </li>
-    </ol>
-  </section>
-
-  <!-- ============ ABOUT ============ -->
-  <section class="about" id="about">
-    <div class="about__grid">
-      <div class="about__copy">
-        <p class="eyebrow eyebrow--muted">ABOUT</p>
-        <h2 class="section-title">I build the part after the demo.</h2>
-        <p>
-          Most model demos die in a notebook. My work is the six months after —
-          getting a system past a single good run and into something that holds
-          up under real traffic, real users, and real edge cases.
-        </p>
-        <p>
-          Formats above range from a recommendation engine serving traffic in
-          production to a from-scratch vision model trained for a client with
-          no ML team of their own. Every clip on this page is unscripted output,
-          not a rendered mockup.
-        </p>
-        <div class="about__stats">
-          <div class="stat">
-            <span class="stat__num">6</span>
-            <span class="stat__label">Systems shipped</span>
-          </div>
-          <div class="stat">
-            <span class="stat__num">3</span>
-            <span class="stat__label">Domains — vision, language, ranking</span>
-          </div>
-          <div class="stat">
-            <span class="stat__num">24/7</span>
-            <span class="stat__label">Uptime target, not aspiration</span>
-          </div>
-        </div>
-      </div>
-      <div class="about__tags" aria-label="Tools and stack">
-        <span>PyTorch</span><span>Python</span><span>CUDA</span>
-        <span>Transformers</span><span>Kubernetes</span><span>Ray</span>
-        <span>Postgres</span><span>ONNX</span><span>Triton</span>
-        <span>Airflow</span><span>gRPC</span><span>Terraform</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section class="contact" id="contact">
-    <p class="eyebrow eyebrow--muted">GET IN TOUCH</p>
-    <h2 class="section-title contact__title">Have a system that needs shipping?</h2>
-    <p class="contact__sub">Tell me what it does today, and what it needs to do next.</p>
-    <a class="contact__email" href="mailto:hello@cipherreel.ai">hello@cipherreel.ai</a>
-
-    <div class="contact__links">
-      <a href="#" target="_blank" rel="noopener">GitHub</a>
-      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="#" target="_blank" rel="noopener">X / Twitter</a>
-    </div>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <span>© <span id="year"></span> Cipher Reel. All systems operational.</span>
-  <span class="site-footer__mono">STATUS: <span class="status-dot"></span> LIVE</span>
+    <nav class="footer-links">
+      <a href="#journey">The Journey</a>
+      <a href="#suites">Suites</a>
+      <a href="#gardens">Gardens</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Enquire</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span>Aravalli Ridge, Rajasthan</span>
+    <span>&copy; <span id="year"></span> Aranya Palace. All chapters reserved.</span>
+  </div>
 </footer>
 
-<!-- ============ LIGHTBOX ============ -->
+<!-- ================= LIGHTBOX ================= -->
 <div class="lightbox" id="lightbox" aria-hidden="true">
-  <div class="lightbox__backdrop" id="lightboxBackdrop"></div>
-  <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="Project video">
-    <button class="lightbox__close" id="lightboxClose" aria-label="Close">✕</button>
-    <video class="lightbox__video" id="lightboxVideo" controls playsinline></video>
-    <div class="lightbox__meta">
-      <span class="lightbox__index" id="lightboxIndex">01</span>
-      <div>
-        <h3 id="lightboxTitle">Title</h3>
-        <p id="lightboxDesc">Description</p>
-      </div>
-    </div>
+  <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+  <div class="lightbox-panel" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close video">&times;</button>
+    <video class="lightbox-video" id="lightboxVideo" controls playsinline></video>
+    <p class="lightbox-caption" id="lightboxCaption"></p>
   </div>
 </div>
 

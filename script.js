@@ -1,44 +1,221 @@
-const PROJECTS = [
-  {
-    file: "01-hero-aerial.mp4",
-    title: "Realtime Recommender Engine",
-    tag: "Ranking",
-    tags: ["PyTorch", "Redis", "gRPC"],
-    desc: "Two-tower retrieval model plus a lightweight re-ranker, serving personalized results in under 40ms at the edge."
-  },
-  {
-    file: "02-arrival-gate.mp4",
-    title: "Document Vision Pipeline",
-    tag: "Computer Vision",
-    tags: ["ONNX", "OpenCV", "Triton"],
-    desc: "Layout-aware OCR and field extraction for scanned forms, trained on a client's own historical archive."
-  },
-  {
-    file: "03-durbar-lobby.mp4",
-    title: "Support Copilot",
-    tag: "Language",
-    tags: ["Transformers", "RAG", "FastAPI"],
-    desc: "Retrieval-grounded assistant for a support team, cutting first-response time by more than half."
-  },
-  {
-    file: "04-royal-suite.mp4",
-    title: "Defect Detection at the Line",
-    tag: "Computer Vision",
-    tags: ["CUDA", "TensorRT", "Edge"],
-    desc: "Millisecond-latency defect classifier running on factory-floor hardware, no cloud round-trip required."
-  },
-  {
-    file: "05-pool-gardens.mp4",
-    title: "Forecasting Service",
-    tag: "Time Series",
-    tags: ["Ray", "Airflow", "Postgres"],
-    desc: "Demand forecasting pipeline retrained nightly across thousands of SKUs, feeding procurement directly."
-  },
-  {
-    file: "06-night-finale.mp4",
-    title: "Voice Intent Router",
-    tag: "Language",
-    tags: ["Whisper", "Kubernetes", "gRPC"],
-    desc: "Low-latency speech-to-intent system routing live calls to the correct workflow with no human in the loop."
+/* ==========================================================
+   ARANYA PALACE — script.js
+   ========================================================== */
+(function () {
+  "use strict";
+
+  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------- Loader ---------------- */
+  window.addEventListener("load", function () {
+    var loader = document.getElementById("loader");
+    if (!loader) return;
+    setTimeout(function () {
+      loader.classList.add("is-hidden");
+    }, 500);
+  });
+
+  /* ---------------- Set current year ---------------- */
+  var yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ---------------- Nav: scrolled state ---------------- */
+  var nav = document.getElementById("nav");
+  var onScroll = function () {
+    if (window.scrollY > 40) {
+      nav.classList.add("is-scrolled");
+    } else {
+      nav.classList.remove("is-scrolled");
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------------- Mobile nav toggle ---------------- */
+  var navToggle = document.getElementById("navToggle");
+  var navLinks = document.getElementById("navLinks");
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", function () {
+      var isOpen = navLinks.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
   }
-];
+
+  /* ---------------- Active nav link on scroll ---------------- */
+  var sections = ["journey", "suites", "gardens", "gallery", "contact"]
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+  var navAnchors = document.querySelectorAll("[data-nav]");
+
+  if (sections.length && "IntersectionObserver" in window) {
+    var navObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            navAnchors.forEach(function (a) {
+              a.classList.toggle("is-active", a.getAttribute("href") === "#" + id);
+            });
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+    sections.forEach(function (s) { navObserver.observe(s); });
+  }
+
+  /* ---------------- Hero sound toggle ---------------- */
+  var heroVideo = document.getElementById("heroVideo");
+  var heroSoundBtn = document.getElementById("heroSoundBtn");
+  if (heroVideo && heroSoundBtn) {
+    heroSoundBtn.addEventListener("click", function () {
+      heroVideo.muted = !heroVideo.muted;
+      var isMuted = heroVideo.muted;
+      heroSoundBtn.setAttribute("aria-pressed", isMuted ? "false" : "true");
+      heroSoundBtn.querySelector(".sound-label").textContent = isMuted ? "Sound off" : "Sound on";
+      if (!isMuted) {
+        heroVideo.play().catch(function () {});
+      }
+    });
+  }
+
+  /* ---------------- Lazy-load & play journey stage videos on view ---------------- */
+  var stageVideos = document.querySelectorAll(".stage-video, .gallery-thumb");
+
+  function loadVideoSrc(video) {
+    if (video.dataset.src && !video.src) {
+      var source = document.createElement("source");
+      source.src = video.dataset.src;
+      source.type = "video/mp4";
+      video.appendChild(source);
+      video.load();
+    }
+  }
+
+  if ("IntersectionObserver" in window) {
+    var mediaObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          var video = entry.target;
+          if (entry.isIntersecting) {
+            loadVideoSrc(video);
+            if (!prefersReducedMotion) {
+              var playPromise = video.play();
+              if (playPromise && playPromise.catch) playPromise.catch(function () {});
+            }
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { rootMargin: "120px 0px", threshold: 0.2 }
+    );
+    stageVideos.forEach(function (v) { mediaObserver.observe(v); });
+  } else {
+    // Fallback: load everything immediately
+    stageVideos.forEach(function (v) {
+      loadVideoSrc(v);
+      v.play().catch(function () {});
+    });
+  }
+
+  /* ---------------- Scroll reveal for journey stages ---------------- */
+  var stages = document.querySelectorAll(".stage");
+  if ("IntersectionObserver" in window && stages.length) {
+    var stageStyleAdded = false;
+    if (!stageStyleAdded) {
+      var styleTag = document.createElement("style");
+      styleTag.textContent =
+        ".stage{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1);}" +
+        ".stage.is-visible{opacity:1;transform:translateY(0);}";
+      document.head.appendChild(styleTag);
+      stageStyleAdded = true;
+    }
+    var stageObserver = new IntersectionObserver(
+      function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.18 }
+    );
+    stages.forEach(function (s) { stageObserver.observe(s); });
+
+    if (prefersReducedMotion) {
+      stages.forEach(function (s) { s.classList.add("is-visible"); });
+    }
+  }
+
+  /* ---------------- Gallery lightbox ---------------- */
+  var lightbox = document.getElementById("lightbox");
+  var lightboxBackdrop = document.getElementById("lightboxBackdrop");
+  var lightboxVideo = document.getElementById("lightboxVideo");
+  var lightboxCaption = document.getElementById("lightboxCaption");
+  var lightboxClose = document.getElementById("lightboxClose");
+  var galleryCards = document.querySelectorAll(".gallery-card");
+  var lastFocused = null;
+
+  function openLightbox(src, title) {
+    lastFocused = document.activeElement;
+    lightboxVideo.src = src;
+    lightboxVideo.muted = false;
+    lightboxCaption.textContent = title || "";
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    lightboxVideo.play().catch(function () {});
+    lightboxClose.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    lightboxVideo.pause();
+    lightboxVideo.removeAttribute("src");
+    lightboxVideo.load();
+    if (lastFocused) lastFocused.focus();
+  }
+
+  galleryCards.forEach(function (card) {
+    card.addEventListener("click", function () {
+      var src = card.getAttribute("data-video");
+      var title = card.getAttribute("data-title");
+      openLightbox(src, title);
+    });
+  });
+
+  if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+  if (lightboxBackdrop) lightboxBackdrop.addEventListener("click", closeLightbox);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && lightbox.classList.contains("is-open")) {
+      closeLightbox();
+    }
+  });
+
+  /* ---------------- Contact form (demo submit) ---------------- */
+  var contactForm = document.getElementById("contactForm");
+  var formNote = document.getElementById("formNote");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      formNote.textContent = "Thank you — the house will reply within one day.";
+      contactForm.reset();
+    });
+  }
+
+  /* ---------------- Pause hero video if reduced motion ---------------- */
+  if (prefersReducedMotion && heroVideo) {
+    heroVideo.removeAttribute("autoplay");
+    heroVideo.pause();
+  }
+})();
