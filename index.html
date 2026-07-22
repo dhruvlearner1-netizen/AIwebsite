@@ -3,41 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aranya Palace — A Journey in Six Chapters</title>
-<meta name="description" content="Aranya Palace: a heritage residence retold through six moving chapters, from the aerial approach to the last light over the gardens.">
+<title>The Rajmahal Palace — Where Kings Once Dreamed</title>
+<meta name="description" content="The Rajmahal Palace: an ultra-premium lake-palace hotel told in six cinematic chapters, from the aerial descent to the last light over the water.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="preload" as="video" href="assets/video/01-hero-aerial.mp4" type="video/mp4">
+<link rel="preload" as="image" href="assets/video/poster.jpg">
 
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ================= LOADER ================= -->
+<!-- ================= GRAIN OVERLAY ================= -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Hidden SVG clip-path def for the pool chapter's cusped-arch reveal.
+     Uses objectBoundingBox (fractional 0-1) units so it scales with the
+     element and can be animated smoothly by script.js on scroll. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="archClip" clipPathUnits="objectBoundingBox">
+      <path id="archClipPath" d="M 0.45 1 L 0.45 0.4 C 0.45 0.25 0.55 0.25 0.55 0.4 L 0.55 1 Z"></path>
+    </clipPath>
+  </defs>
+</svg>
+
+<!-- ================= CUSTOM CURSOR ================= -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor-dot"></span>
+  <span class="cursor-ring"><span class="cursor-label">SCROLL</span></span>
+</div>
+
+<!-- ================= PRELOADER ================= -->
 <div class="loader" id="loader" aria-hidden="true">
-  <div class="loader-crest">
-    <svg viewBox="0 0 100 100" class="crest-svg">
-      <circle cx="50" cy="50" r="46" class="crest-ring"></circle>
-      <path d="M50 14 L58 42 L86 50 L58 58 L50 86 L42 58 L14 50 L42 42 Z" class="crest-mark"></path>
-    </svg>
-  </div>
-  <p class="loader-label">ARANYA PALACE</p>
+  <div class="loader-word" id="loaderWord" aria-hidden="true"></div>
+  <div class="loader-rule"><span class="loader-rule-fill" id="loaderRuleFill"></span></div>
+  <div class="loader-count" id="loaderCount">00</div>
 </div>
 
 <!-- ================= NAV ================= -->
 <header class="nav" id="nav">
-  <a href="#top" class="nav-crest" aria-label="Aranya Palace, home">
-    <svg viewBox="0 0 100 100" class="nav-crest-svg" aria-hidden="true">
-      <circle cx="50" cy="50" r="46" class="crest-ring"></circle>
-      <path d="M50 14 L58 42 L86 50 L58 58 L50 86 L42 58 L14 50 L42 42 Z" class="crest-mark"></path>
-    </svg>
-    <span>Aranya&nbsp;Palace</span>
+  <a href="#top" class="nav-mark" aria-label="The Rajmahal Palace, home">
+    <span class="nav-mark-text">Rajmahal</span><span class="nav-mark-sub">Palace</span>
   </a>
 
   <nav class="nav-links" id="navLinks">
-    <a href="#journey" data-nav>The Journey</a>
-    <a href="#suites" data-nav>Suites</a>
+    <a href="#arrival" data-nav>Arrival</a>
+    <a href="#suite" data-nav>Suites</a>
     <a href="#gardens" data-nav>Gardens</a>
     <a href="#gallery" data-nav>Gallery</a>
     <a href="#contact" data-nav>Enquire</a>
@@ -48,208 +63,244 @@
   </button>
 </header>
 
-<!-- ================= HERO ================= -->
-<section class="hero" id="top">
-  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
-    <source src="assets/video/01-hero-aerial.mp4" type="video/mp4">
-  </video>
-  <div class="hero-scrim"></div>
+<!-- ================= CHAPTER NUMBER (fixed, crossfades) ================= -->
+<div class="chapter-marker" id="chapterMarker" aria-hidden="true">
+  <span class="chapter-marker-num" id="chapterNum">01</span>
+  <span class="chapter-marker-rule"></span>
+</div>
 
-  <div class="hero-content">
-    <p class="eyebrow reveal">A Heritage Residence, Rajasthan</p>
-    <h1 class="hero-title reveal">
-      <span>Six Chapters.</span>
-      <span class="hero-title-em">One Arrival.</span>
-    </h1>
-    <p class="hero-sub reveal">Descend from the ridgeline into a palace that has kept its own hours since 1861 — told here in six unbroken moving frames, not one filter applied.</p>
-    <div class="hero-actions reveal">
-      <a href="#journey" class="btn btn-primary">Begin the Journey</a>
-      <button class="btn btn-ghost" id="heroSoundBtn" aria-pressed="false">
-        <span class="sound-icon" aria-hidden="true"></span>
-        <span class="sound-label">Sound off</span>
-      </button>
+<!-- ================= CHAPTER 1 — HERO (scrubbed) ================= -->
+<section class="chapter chapter-scrub" id="top" data-chapter="01" data-video="assets/video/01-hero-aerial.mp4" data-poster="assets/video/poster.jpg">
+  <div class="chapter-pin">
+    <div class="chapter-media">
+      <img class="chapter-poster" src="assets/video/poster.jpg" alt="" data-role="poster">
+      <video class="chapter-video" muted playsinline preload="auto" poster="assets/video/poster.jpg" data-role="scrub-video">
+        <source src="assets/video/01-hero-aerial.mp4" type="video/mp4">
+      </video>
+      <div class="chapter-scrim chapter-scrim-hero"></div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="mask-line"><span class="mask-inner" data-split>Where Kings Once Dreamed</span></span>
+      </h1>
+      <h1 class="hero-title hero-title-second">
+        <span class="mask-line"><span class="mask-inner" data-split>Now, You Will.</span></span>
+      </h1>
+    </div>
+
+    <a href="#arrival" class="scroll-cue" aria-label="Scroll to descend">
+      <span class="scroll-cue-line"></span>
+      <span>Scroll to descend</span>
+    </a>
+
+    <div class="chapter-progress" aria-hidden="true"><span class="chapter-progress-fill" data-progress-fill></span></div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 2 — ARRIVAL (scrubbed) ================= -->
+<section class="chapter chapter-scrub" id="arrival" data-chapter="02" data-video="assets/video/02-arrival-gate.mp4" data-poster="assets/video/02-poster.jpg">
+  <div class="chapter-pin">
+    <div class="chapter-media">
+      <img class="chapter-poster" src="assets/video/02-poster.jpg" alt="" data-role="poster">
+      <video class="chapter-video" muted playsinline preload="none" poster="assets/video/02-poster.jpg" data-role="scrub-video">
+        <source src="assets/video/02-arrival-gate.mp4" type="video/mp4">
+      </video>
+      <div class="chapter-scrim"></div>
+    </div>
+
+    <div class="arrival-content">
+      <p class="eyebrow">01 — The Arrival</p>
+      <h2 class="arrival-line">
+        <span class="arrival-word arrival-word-left mask-line"><span class="mask-inner" data-split>Through gates carved</span></span>
+        <span class="arrival-word arrival-word-right mask-line"><span class="mask-inner" data-split>by a hundred hands</span></span>
+      </h2>
+    </div>
+
+    <svg class="jali-overlay" id="jaliOverlay" viewBox="0 0 400 400" aria-hidden="true">
+      <defs>
+        <pattern id="jaliPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M20 2 L38 20 L20 38 L2 20 Z" fill="none" stroke="#C9A96E" stroke-width="0.9"/>
+          <circle cx="20" cy="20" r="4" fill="none" stroke="#C9A96E" stroke-width="0.9"/>
+        </pattern>
+      </defs>
+      <rect width="400" height="400" fill="url(#jaliPattern)"></rect>
+    </svg>
+
+    <div class="chapter-progress" aria-hidden="true"><span class="chapter-progress-fill" data-progress-fill></span></div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 3 — DURBAR HALL (loop, split layout) ================= -->
+<section class="chapter chapter-split" id="durbar" data-chapter="03">
+  <div class="split-media">
+    <video class="loop-video" muted loop playsinline preload="none" data-src="assets/video/03-durbar-lobby.mp4"></video>
+    <div class="split-media-scrim"></div>
+  </div>
+  <div class="split-panel">
+    <p class="eyebrow">02 — The Durbar Hall</p>
+    <h2 class="split-title mask-line"><span class="mask-inner" data-split>A hall built for audience, kept for arrival</span></h2>
+    <p class="split-copy reveal-line">Once the seat of public court, now the first room a guest stands in. The frescoes are original; the silence is by design — nothing competes with forty-foot ceilings and the light off the lake.</p>
+
+    <div class="counters">
+      <div class="counter">
+        <span class="counter-num" data-counter="1743">0</span>
+        <span class="counter-label">Year Founded</span>
+      </div>
+      <div class="counter">
+        <span class="counter-num" data-counter="92">0</span>
+        <span class="counter-label">Royal Suites</span>
+      </div>
+      <div class="counter">
+        <span class="counter-num" data-counter="14">0</span>
+        <span class="counter-label">Acres of Gardens</span>
+      </div>
     </div>
   </div>
-
-  <a href="#journey" class="scroll-cue" aria-label="Scroll to explore">
-    <span class="scroll-cue-line"></span>
-    <span>Scroll</span>
-  </a>
 </section>
 
-<!-- ================= INTRO ================= -->
-<section class="intro">
-  <div class="intro-inner">
-    <p class="intro-kicker">No. 03 on the ridge, Aravalli hills</p>
-    <h2 class="intro-line">
-      The palace does not perform for the camera.<br>
-      The camera simply learned to wait for it.
-    </h2>
-    <p class="intro-copy">Every reel on this page is a single, unedited pass through the property — the gate at dawn, the durbar at rest, a suite before the linens are turned. We built this site as we would guide a first-time guest: in order, unhurried, chapter by chapter.</p>
+<!-- ================= CHAPTER 4 — THE MAHARAJA SUITE (loop, parallax + horizontal cards) ================= -->
+<section class="chapter chapter-suite" id="suite" data-chapter="04">
+  <div class="suite-pin">
+    <div class="suite-media">
+      <video class="loop-video suite-video" muted loop playsinline preload="none" data-src="assets/video/04-royal-suite.mp4"></video>
+      <div class="chapter-scrim"></div>
+    </div>
+
+    <div class="suite-head">
+      <p class="eyebrow">03 — The Maharaja Suite</p>
+      <h2 class="split-title mask-line"><span class="mask-inner" data-split>Rooms that once housed a Maharaja's private study</span></h2>
+    </div>
+
+    <div class="suite-track" id="suiteTrack">
+      <article class="suite-card">
+        <span class="suite-card-num">01</span>
+        <h3>The Maharaja Suite</h3>
+        <p class="suite-card-line">A private study reimagined, desk still where he left it.</p>
+        <span class="suite-card-price">From ₹1,85,000/night</span>
+      </article>
+      <article class="suite-card">
+        <span class="suite-card-num">02</span>
+        <h3>The Zenana Suite</h3>
+        <p class="suite-card-line">Latticed windows, a courtyard that keeps its own dusk.</p>
+        <span class="suite-card-price">From ₹1,40,000/night</span>
+      </article>
+      <article class="suite-card">
+        <span class="suite-card-num">03</span>
+        <h3>The Lakeview Suite</h3>
+        <p class="suite-card-line">A private terrace suspended over still water.</p>
+        <span class="suite-card-price">From ₹1,10,000/night</span>
+      </article>
+    </div>
   </div>
 </section>
 
-<!-- ================= THE JOURNEY (sequential narrative) ================= -->
-<section class="journey" id="journey">
-  <div class="journey-head">
-    <p class="eyebrow">The Journey</p>
-    <h2 class="section-title">Arrival to nightfall, in the order you'll live it</h2>
-  </div>
+<!-- ================= CHAPTER 5 — POOL & GARDENS (loop, clip-path expand) ================= -->
+<section class="chapter chapter-pool" id="gardens" data-chapter="05">
+  <div class="pool-pin">
+    <div class="pool-media" id="poolMedia">
+      <video class="loop-video pool-video" muted loop playsinline preload="none" data-src="assets/video/05-pool-gardens.mp4"></video>
+      <div class="chapter-scrim chapter-scrim-light"></div>
+    </div>
 
-  <div class="journey-line" aria-hidden="true"></div>
-
-  <div class="journey-stages">
-
-    <article class="stage" id="suites-anchor" data-stage="02">
-      <div class="stage-media">
-        <video class="stage-video" data-src="assets/video/02-arrival-gate.mp4" muted loop playsinline preload="none"></video>
-        <div class="stage-media-frame"></div>
-      </div>
-      <div class="stage-text">
-        <span class="stage-num">02</span>
-        <h3>The Arrival Gate</h3>
-        <p>Hand-riveted teak, iron studs cast in the palace's own foundry, and a threshold that has not moved in a hundred and sixty years. The car stops. The gate does the rest.</p>
-      </div>
-    </article>
-
-    <article class="stage stage-reverse" data-stage="03">
-      <div class="stage-media">
-        <video class="stage-video" data-src="assets/video/03-durbar-lobby.mp4" muted loop playsinline preload="none"></video>
-        <div class="stage-media-frame"></div>
-      </div>
-      <div class="stage-text">
-        <span class="stage-num">03</span>
-        <h3>The Durbar Lobby</h3>
-        <p>Once the hall of public audience, now the first room a guest stands in. The frescoes are original; the silence is by design — no piped music competes with forty-foot ceilings.</p>
-      </div>
-    </article>
-
-    <article class="stage" id="suites" data-stage="04">
-      <div class="stage-media">
-        <video class="stage-video" data-src="assets/video/04-royal-suite.mp4" muted loop playsinline preload="none"></video>
-        <div class="stage-media-frame"></div>
-      </div>
-      <div class="stage-text">
-        <span class="stage-num">04</span>
-        <h3>The Royal Suite</h3>
-        <p>Six hundred square feet that once housed a Maharaja's private study. The desk is still where he left it. The Wi-Fi, mercifully, is not from the same era.</p>
-      </div>
-    </article>
-
-    <article class="stage stage-reverse" id="gardens" data-stage="05">
-      <div class="stage-media">
-        <video class="stage-video" data-src="assets/video/05-pool-gardens.mp4" muted loop playsinline preload="none"></video>
-        <div class="stage-media-frame"></div>
-      </div>
-      <div class="stage-text">
-        <span class="stage-num">05</span>
-        <h3>The Pool &amp; Gardens</h3>
-        <p>A stepwell reimagined as a lap pool, bordered by champa trees planted for a wedding in 1932. Breakfast is served at the waterline, whenever you decide morning begins.</p>
-      </div>
-    </article>
-
-    <article class="stage" data-stage="06">
-      <div class="stage-media">
-        <video class="stage-video" data-src="assets/video/06-night-finale.mp4" muted loop playsinline preload="none"></video>
-        <div class="stage-media-frame"></div>
-      </div>
-      <div class="stage-text">
-        <span class="stage-num">06</span>
-        <h3>The Evening, Lit</h3>
-        <p>Four thousand oil lamps, placed by hand along every parapet, every solstice. This is the last thing our guests see before dinner — and the first thing they ask us to explain.</p>
-      </div>
-    </article>
-
+    <div class="pool-keywords" aria-hidden="true">
+      <span class="pool-keyword" data-depth="0.2">Stillness</span>
+      <span class="pool-keyword" data-depth="0.45">Marigold</span>
+      <span class="pool-keyword" data-depth="0.7">Dawn</span>
+    </div>
   </div>
 </section>
 
-<!-- ================= GALLERY / PORTFOLIO — all six films ================= -->
+<!-- ================= CHAPTER 6 — NIGHT FINALE (scrubbed) ================= -->
+<section class="chapter chapter-scrub" id="finale" data-chapter="06" data-video="assets/video/06-night-finale.mp4" data-poster="assets/video/06-poster.jpg">
+  <div class="chapter-pin">
+    <div class="chapter-media">
+      <img class="chapter-poster" src="assets/video/06-poster.jpg" alt="" data-role="poster">
+      <video class="chapter-video" muted playsinline preload="none" poster="assets/video/06-poster.jpg" data-role="scrub-video">
+        <source src="assets/video/06-night-finale.mp4" type="video/mp4">
+      </video>
+      <div class="chapter-scrim chapter-scrim-night"></div>
+    </div>
+
+    <div class="finale-content">
+      <h2 class="finale-line" id="finaleLine">
+        <span class="finale-word">Some</span> <span class="finale-word">places</span> <span class="finale-word">you</span> <span class="finale-word">visit.</span>
+        <span class="finale-word finale-word-em">This</span> <span class="finale-word finale-word-em">one,</span> <span class="finale-word finale-word-em">you</span> <span class="finale-word finale-word-em">remember.</span>
+      </h2>
+      <a href="#contact" class="btn btn-cta" id="ctaBtn">
+        <span class="btn-cta-fill"></span>
+        <span class="btn-cta-text">Reserve Your Stay</span>
+      </a>
+    </div>
+
+    <div class="chapter-progress" aria-hidden="true"><span class="chapter-progress-fill" data-progress-fill></span></div>
+  </div>
+</section>
+
+<!-- ================= GALLERY / FULL REEL ================= -->
 <section class="gallery" id="gallery">
   <div class="gallery-head">
     <p class="eyebrow">The Full Reel</p>
-    <h2 class="section-title">All six chapters, in one place</h2>
+    <h2 class="section-title mask-line"><span class="mask-inner" data-split>All six chapters, in one place</span></h2>
     <p class="gallery-copy">Tap any frame to watch it in full, with sound.</p>
   </div>
 
   <div class="gallery-grid">
 
-    <button class="gallery-card gallery-card-wide" data-video="assets/video/01-hero-aerial.mp4" data-title="01 — The Aerial Approach">
+    <button class="gallery-card gallery-card-wide" data-video="assets/video/01-hero-aerial.mp4" data-title="01 — Where Kings Once Dreamed">
       <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/01-hero-aerial.mp4"></video>
       <span class="gallery-card-info">
         <span class="gallery-num">01</span>
-        <span class="gallery-name">The Aerial Approach</span>
+        <span class="gallery-name">The Aerial Descent</span>
       </span>
       <span class="gallery-play" aria-hidden="true"></span>
     </button>
 
-    <button class="gallery-card" data-video="assets/video/02-arrival-gate.mp4" data-title="02 — The Arrival Gate">
+    <button class="gallery-card" data-video="assets/video/02-arrival-gate.mp4" data-title="02 — The Arrival">
       <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/02-arrival-gate.mp4"></video>
       <span class="gallery-card-info">
         <span class="gallery-num">02</span>
-        <span class="gallery-name">The Arrival Gate</span>
+        <span class="gallery-name">The Arrival</span>
       </span>
       <span class="gallery-play" aria-hidden="true"></span>
     </button>
 
-    <button class="gallery-card" data-video="assets/video/03-durbar-lobby.mp4" data-title="03 — The Durbar Lobby">
+    <button class="gallery-card" data-video="assets/video/03-durbar-lobby.mp4" data-title="03 — The Durbar Hall">
       <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/03-durbar-lobby.mp4"></video>
       <span class="gallery-card-info">
         <span class="gallery-num">03</span>
-        <span class="gallery-name">The Durbar Lobby</span>
+        <span class="gallery-name">The Durbar Hall</span>
       </span>
       <span class="gallery-play" aria-hidden="true"></span>
     </button>
 
-    <button class="gallery-card" data-video="assets/video/04-royal-suite.mp4" data-title="04 — The Royal Suite">
+    <button class="gallery-card" data-video="assets/video/04-royal-suite.mp4" data-title="04 — The Maharaja Suite">
       <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/04-royal-suite.mp4"></video>
       <span class="gallery-card-info">
         <span class="gallery-num">04</span>
-        <span class="gallery-name">The Royal Suite</span>
+        <span class="gallery-name">The Maharaja Suite</span>
       </span>
       <span class="gallery-play" aria-hidden="true"></span>
     </button>
 
-    <button class="gallery-card" data-video="assets/video/05-pool-gardens.mp4" data-title="05 — The Pool &amp; Gardens">
+    <button class="gallery-card" data-video="assets/video/05-pool-gardens.mp4" data-title="05 — Pool &amp; Gardens">
       <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/05-pool-gardens.mp4"></video>
       <span class="gallery-card-info">
         <span class="gallery-num">05</span>
-        <span class="gallery-name">The Pool &amp; Gardens</span>
+        <span class="gallery-name">Pool &amp; Gardens</span>
       </span>
       <span class="gallery-play" aria-hidden="true"></span>
     </button>
 
-    <button class="gallery-card gallery-card-wide" data-video="assets/video/06-night-finale.mp4" data-title="06 — The Evening, Lit">
+    <button class="gallery-card gallery-card-wide" data-video="assets/video/06-night-finale.mp4" data-title="06 — The Night Finale">
       <video class="gallery-thumb" muted loop playsinline preload="none" data-src="assets/video/06-night-finale.mp4"></video>
       <span class="gallery-card-info">
         <span class="gallery-num">06</span>
-        <span class="gallery-name">The Evening, Lit</span>
+        <span class="gallery-name">The Night Finale</span>
       </span>
       <span class="gallery-play" aria-hidden="true"></span>
     </button>
 
-  </div>
-</section>
-
-<!-- ================= QUOTE / STAT STRIP ================= -->
-<section class="strip">
-  <div class="strip-item">
-    <span class="strip-num">1861</span>
-    <span class="strip-label">Year the gate was hung</span>
-  </div>
-  <div class="strip-divider" aria-hidden="true"></div>
-  <div class="strip-item">
-    <span class="strip-num">18</span>
-    <span class="strip-label">Suites, none identical</span>
-  </div>
-  <div class="strip-divider" aria-hidden="true"></div>
-  <div class="strip-item">
-    <span class="strip-num">4,000</span>
-    <span class="strip-label">Lamps, lit by hand nightly</span>
-  </div>
-  <div class="strip-divider" aria-hidden="true"></div>
-  <div class="strip-item">
-    <span class="strip-num">01</span>
-    <span class="strip-label">Arrival, done properly</span>
   </div>
 </section>
 
@@ -257,7 +308,7 @@
 <section class="contact" id="contact">
   <div class="contact-inner">
     <p class="eyebrow">Enquire</p>
-    <h2 class="contact-title">The ridge is quiet after dusk. Come see why.</h2>
+    <h2 class="contact-title mask-line"><span class="mask-inner" data-split>The lake is quiet after dusk. Come see why.</span></h2>
     <p class="contact-copy">Reservations are handled by a person, not a form. Write to us and a member of the house will reply within one day.</p>
     <form class="contact-form" id="contactForm">
       <div class="field-row">
@@ -271,8 +322,8 @@
         </label>
       </div>
       <label class="field">
-        <span>Preferred dates &amp; chapter of interest</span>
-        <textarea name="message" rows="3" placeholder="e.g. Royal Suite, first week of December"></textarea>
+        <span>Preferred dates &amp; suite of interest</span>
+        <textarea name="message" rows="3" placeholder="e.g. Maharaja Suite, first week of December"></textarea>
       </label>
       <button type="submit" class="btn btn-primary btn-wide">Send Enquiry</button>
       <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
@@ -280,27 +331,25 @@
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
+<!-- ================= FOOTER (theme flip) ================= -->
+<footer class="footer" id="footer">
+  <div class="jali-border" aria-hidden="true"></div>
   <div class="footer-top">
-    <a href="#top" class="footer-crest">
-      <svg viewBox="0 0 100 100" class="nav-crest-svg" aria-hidden="true">
-        <circle cx="50" cy="50" r="46" class="crest-ring"></circle>
-        <path d="M50 14 L58 42 L86 50 L58 58 L50 86 L42 58 L14 50 L42 42 Z" class="crest-mark"></path>
-      </svg>
-      <span>Aranya&nbsp;Palace</span>
+    <a href="#top" class="nav-mark footer-mark">
+      <span class="nav-mark-text">Rajmahal</span><span class="nav-mark-sub">Palace</span>
     </a>
     <nav class="footer-links">
-      <a href="#journey">The Journey</a>
-      <a href="#suites">Suites</a>
+      <a href="#arrival">Arrival</a>
+      <a href="#suite">Suites</a>
       <a href="#gardens">Gardens</a>
       <a href="#gallery">Gallery</a>
       <a href="#contact">Enquire</a>
     </nav>
   </div>
   <div class="footer-bottom">
-    <span>Aravalli Ridge, Rajasthan</span>
-    <span>&copy; <span id="year"></span> Aranya Palace. All chapters reserved.</span>
+    <span>By the water, Rajasthan</span>
+    <span>A fictional concept property — designed &amp; built with Claude.</span>
+    <span>&copy; <span id="year"></span> The Rajmahal Palace.</span>
   </div>
 </footer>
 
@@ -314,6 +363,10 @@
   </div>
 </div>
 
+<!-- ================= SCRIPTS ================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.14/lenis.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
